@@ -1,6 +1,6 @@
 'use strict';
 
-// This file contains then/promise specific extensions that are only useful
+// This file contains then/promise-source specific extensions that are only useful
 // for node.js interop
 
 var Promise = require('./core.js');

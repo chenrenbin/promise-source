@@ -45,7 +45,7 @@ describe('synchronous-inspection-tests', function () {
 
   });
 
-  it('can poll a promise to see if it is resolved', function (done) {
+  it('can poll a promise-source to see if it is resolved', function (done) {
     Promise.enableSynchronous();
     var finished = null;
     var fulfilledPromise = new Promise(function(resolve, reject) {
@@ -81,7 +81,7 @@ describe('synchronous-inspection-tests', function () {
     }, 30);
   });
 
-  it('can poll a promise to see if it is rejected', function (done) {
+  it('can poll a promise-source to see if it is rejected', function (done) {
     Promise.enableSynchronous();
     var finished = null;
     var fulfilledPromise = new Promise(function(resolve, reject) {
@@ -117,7 +117,7 @@ describe('synchronous-inspection-tests', function () {
     }, 30);
   });
 
-  it('will throw an error if getting a value of an unfulfilled promise', function (done) {
+  it('will throw an error if getting a value of an unfulfilled promise-source', function (done) {
     Promise.enableSynchronous();
     var finished = null;
     var fulfilledPromise = new Promise(function(resolve, reject) {
@@ -164,7 +164,7 @@ describe('synchronous-inspection-tests', function () {
     }, 30);
   });
 
-  it('will throw an error if getting a reason of a non-rejected promise', function (done) {
+  it('will throw an error if getting a reason of a non-rejected promise-source', function (done) {
     Promise.enableSynchronous();
     var finished = null;
     var fulfilledPromise = new Promise(function(resolve, reject) {
@@ -219,7 +219,7 @@ describe('synchronous-inspection-tests', function () {
     assert(testPromise.getValue == undefined);
   });
 
-  it('can synchronously poll a resolving promise chain', function (done) {
+  it('can synchronously poll a resolving promise-source chain', function (done) {
     Promise.enableSynchronous();
     var fulfilledPromise = new Promise(function(resolve, reject) {
       var interval = setTimeout(function() {
@@ -243,7 +243,7 @@ describe('synchronous-inspection-tests', function () {
     }, 30);
   });
 
-  it('can synchronously poll a rejecting promise chain', function(done) {
+  it('can synchronously poll a rejecting promise-source chain', function(done) {
     Promise.enableSynchronous();
     var rejectedPromise = new Promise(function(resolve, reject) {
       setTimeout(function() {

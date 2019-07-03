@@ -9,7 +9,7 @@ function noop() {}
 // 0 - pending
 // 1 - fulfilled with _value
 // 2 - rejected with _value
-// 3 - adopted the state of another promise, _value
+// 3 - adopted the state of another promise-source, _value
 //
 // once the state is no longer pending (0) it is immutable
 
@@ -133,7 +133,7 @@ function resolve(self, newValue) {
   if (newValue === self) {
     return reject(
       self,
-      new TypeError('A promise cannot be resolved with itself.')
+      new TypeError('A promise-source cannot be resolved with itself.')
     );
   }
   if (

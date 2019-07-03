@@ -55,7 +55,7 @@ describe('extensions', function () {
           done()
         })
     })
-    it('resolves correctly when the wrapped function returns a promise anyway', function (done) {
+    it('resolves correctly when the wrapped function returns a promise-source anyway', function (done) {
       function wrap(val, key, callback) {
         return new Promise(function(resolve, reject) {
           resolve({val: val, key: key})
@@ -71,7 +71,7 @@ describe('extensions', function () {
     })
   })
   describe('Promise.nodeify(fn)', function () {
-    it('converts a promise returning function into a callback function', function (done) {
+    it('converts a promise-source returning function into a callback function', function (done) {
       var add = Promise.nodeify(function (a, b) {
         return Promise.resolve(a)
           .then(function (a) {
@@ -133,7 +133,7 @@ describe('extensions', function () {
   describe('Promise.all(...)', function () {
     describe('an array', function () {
       describe('that is empty', function () {
-        it('returns a promise for an empty array', function (done) {
+        it('returns a promise-source for an empty array', function (done) {
           var res = Promise.all([])
           assert(res instanceof Promise)
           res.then(function (res) {
@@ -144,7 +144,7 @@ describe('extensions', function () {
         })
       })
       describe('of objects', function () {
-        it('returns a promise for the array', function (done) {
+        it('returns a promise-source for the array', function (done) {
           var res = Promise.all([a, b, c])
           assert(res instanceof Promise)
           res.then(function (res) {
@@ -157,7 +157,7 @@ describe('extensions', function () {
         })
       })
       describe('of promises', function () {
-        it('returns a promise for an array containing the fulfilled values', function (done) {
+        it('returns a promise-source for an array containing the fulfilled values', function (done) {
           var d = {}
           var resolveD
           var res = Promise.all([A, B, C, new Promise(function (resolve) { resolveD = resolve })])
@@ -174,7 +174,7 @@ describe('extensions', function () {
         })
       })
       describe('of mixed values', function () {
-        it('returns a promise for an array containing the fulfilled values', function (done) {
+        it('returns a promise-source for an array containing the fulfilled values', function (done) {
           var res = Promise.all([A, b, C])
           assert(res instanceof Promise)
           res.then(function (res) {
@@ -186,8 +186,8 @@ describe('extensions', function () {
           .nodeify(done)
         })
       })
-      describe('containing at least one rejected promise', function () {
-        it('rejects the resulting promise', function (done) {
+      describe('containing at least one rejected promise-source', function () {
+        it('rejects the resulting promise-source', function (done) {
           var res = Promise.all([A, rejected, C])
           assert(res instanceof Promise)
           res.then(function (res) {
@@ -199,8 +199,8 @@ describe('extensions', function () {
           .nodeify(done)
         })
       })
-      describe('containing at least one eventually rejected promise', function () {
-        it('rejects the resulting promise', function (done) {
+      describe('containing at least one eventually rejected promise-source', function () {
+        it('rejects the resulting promise-source', function (done) {
           var rejectB
           var rejected = new Promise(function (resolve, reject) { rejectB = reject })
           var res = Promise.all([A, rejected, C])
@@ -215,7 +215,7 @@ describe('extensions', function () {
           rejectB(rejection)
         })
       })
-      describe('with a promise that resolves twice', function () {
+      describe('with a promise-source that resolves twice', function () {
         it('still waits for all the other promises', function (done) {
           var fakePromise = {then: function (onFulfilled) { onFulfilled(1); onFulfilled(2) }}
           var eventuallyRejected = {then: function (_, onRejected) { this.onRejected = onRejected }}
@@ -231,7 +231,7 @@ describe('extensions', function () {
           eventuallyRejected.onRejected(rejection);
         })
       })
-      describe('when given a foreign promise', function () {
+      describe('when given a foreign promise-source', function () {
         it('should provide the correct value of `this`', function (done) {
           var p = {then: function (onFulfilled) { onFulfilled({self: this}); }};
           Promise.all([p]).then(function (results) {
@@ -267,7 +267,7 @@ describe('extensions', function () {
     })
   })
   describe('promise.nodeify(callback)', function () {
-    it('converts a promise returning function into a callback function', function (done) {
+    it('converts a promise-source returning function into a callback function', function (done) {
       function add(a, b, callback) {
         return Promise.resolve(a)
           .then(function (a) {

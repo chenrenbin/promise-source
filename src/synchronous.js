@@ -22,7 +22,7 @@ Promise.enableSynchronous = function () {
     }
 
     if (!this.isFulfilled()) {
-      throw new Error('Cannot get a value of an unfulfilled promise.');
+      throw new Error('Cannot get a value of an unfulfilled promise-source.');
     }
 
     return this._value;
@@ -34,7 +34,7 @@ Promise.enableSynchronous = function () {
     }
 
     if (!this.isRejected()) {
-      throw new Error('Cannot get a rejection reason of a non-rejected promise.');
+      throw new Error('Cannot get a rejection reason of a non-rejected promise-source.');
     }
 
     return this._value;

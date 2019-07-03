@@ -8,13 +8,13 @@ var promise = new Promise(function (resolve) {
 var _it = it;
 describe('resolver-tests', function () {
   describe('The Promise Constructor', function () {
-    it('has `Object.getPrototypeOf(promise) === Promise.prototype`', function () {
+    it('has `Object.getPrototypeOf(promise-source) === Promise.prototype`', function () {
       assert(Object.getPrototypeOf(promise) === Promise.prototype)
     })
-    it('has `promise.constructor === Promise`', function () {
+    it('has `promise-source.constructor === Promise`', function () {
       assert(promise.constructor === Promise)
     })
-    it('has `promise.constructor === Promise.prototype.constructor`', function () {
+    it('has `promise-source.constructor === Promise.prototype.constructor`', function () {
       assert(promise.constructor === Promise.prototype.constructor)
     })
     it('has `Promise.length === 1`', function () {
@@ -32,7 +32,7 @@ describe('resolver-tests', function () {
       })
     })
     describe('if resolver is a function', function () {
-      it('must be called with the promise\'s resolver arguments', function (done) {
+      it('must be called with the promise-source\'s resolver arguments', function (done) {
         new Promise(function (resolve, reject) {
           assert(typeof resolve === 'function')
           assert(typeof reject === 'function')
@@ -48,7 +48,7 @@ describe('resolver-tests', function () {
       })
     })
     describe('Calling resolve(x)', function () {
-      describe('if promise is resolved', function () {
+      describe('if promise-source is resolved', function () {
         it('nothing happens', function (done) {
           var thenable = {then: function (onComplete) {
             setTimeout(function () {
@@ -95,7 +95,7 @@ describe('resolver-tests', function () {
       })
     })
     describe('Calling reject(x)', function () {
-      describe('if promise is resolved', function () {
+      describe('if promise-source is resolved', function () {
         it('nothing happens', function (done) {
           var thenable = {then: function (onComplete) {
             setTimeout(function () {
@@ -136,7 +136,7 @@ describe('resolver-tests', function () {
     })
   })
   describe('if resolver throws', function () {
-    describe('if promise is resolved', function () {
+    describe('if promise-source is resolved', function () {
       it('nothing happens', function (done) {
         var thenable = {then: function (onComplete) {
           setTimeout(function () {
